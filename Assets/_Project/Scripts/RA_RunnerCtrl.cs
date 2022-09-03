@@ -9,7 +9,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class RunnerCtrl : MonoBehaviour
+public class RA_RunnerCtrl : MonoBehaviour
 {
     /* Variables */
 
