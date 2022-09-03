@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+/**
+ * $File: RA_UIManager.cs $
+ * $Date: 2022-09-03 21:44:31 $
+ * $Revision: $
+ * $Creator: Jen-Chieh Shen $
+ * $Notice: See LICENSE.txt for modification and distribution information
+ *                   Copyright © 2022 by Shen, Jen-Chieh $
+ */
 using UnityEngine;
 
 public class RA_UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    /* Variables */
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    /* Setter & Getter */
+
+    /* Functions */
 }
