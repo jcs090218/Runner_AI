@@ -6,26 +6,30 @@
  * $Notice: See LICENSE.txt for modification and distribution information
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// 
 /// </summary>
+[Serializable]
 public class NeuralNetwork
 {
     /* Variables */
 
-    public InputLayer inputLayer = new InputLayer();
+    public InputLayer inputLayer = null;
     public List<HiddenLayer> hiddenLayers = null;
-    public OutputLayer outputLayer = new OutputLayer();
+    public OutputLayer outputLayer = null;
 
     /* Setter & Getter */
 
     /* Functions */
 
-    public NeuralNetwork(int hiddenLayers)
+    public NeuralNetwork(InputLayer inputLayer, int hiddenLayers, OutputLayer outputLayer)
     {
+        this.inputLayer = inputLayer;
         this.hiddenLayers = new List<HiddenLayer>(hiddenLayers);
+        this.outputLayer = outputLayer;
     }
 }

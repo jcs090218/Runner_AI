@@ -6,11 +6,12 @@
  * $Notice: See LICENSE.txt for modification and distribution information
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
-using UnityEngine;
+using System;
 
 /// <summary>
 /// 
 /// </summary>
+[Serializable]
 public class HiddenLayer : Layer
 {
     /* Variables */
