@@ -31,13 +31,13 @@ public class Neuron
     {
         float sum = Sum(prevLayer.neurons);
 
-        weight = sum;  // update
+        weight = (float)ActivationFunctions.Do(activationType, sum + bias);
 
-        return (float)ActivationFunctions.Do(activationType, sum + bias);
+        return weight;
     }
 
     /// <summary>
-    /// 
+    /// The summation of a[0-n] * b[0-n]
     /// </summary>
     private float Sum(List<Neuron> neurons)
     {
