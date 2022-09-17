@@ -6,8 +6,6 @@
  * $Notice: See LICENSE.txt for modification and distribution information
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -16,6 +14,10 @@ using UnityEngine;
 public class Neuron : MonoBehaviour
 {
     /* Variables */
+
+    public float bias = 0.0f;
+
+    public float weight = 0.0f;
 
     /* Setter & Getter */
 

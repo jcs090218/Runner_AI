@@ -9,7 +9,7 @@
 using System.Collections.Generic;
 
 /// <summary>
-/// 
+/// Base class for all neural network layers.
 /// </summary>
 public abstract class Layer
 {
