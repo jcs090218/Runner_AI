@@ -31,4 +31,12 @@ public abstract class Layer
             neuron.weight = Random.Range(min, max);
         }
     }
+
+    public void Process(Layer prevLayer)
+    {
+        foreach (var neuron in prevLayer.neurons)
+        {
+            neuron.Process(prevLayer);
+        }
+    }
 }

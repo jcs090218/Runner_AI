@@ -18,7 +18,7 @@ public class RA_AppManager : JCS_Manager<RA_AppManager>
 
     [Header("** Check Variables (RA_AppManager) **")]
 
-    [Tooltip("")]
+    [Tooltip("Generation index.")]
     public int generation = 0;
 
     /* Setter & Getter */

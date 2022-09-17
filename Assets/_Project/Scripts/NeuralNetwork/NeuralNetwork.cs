@@ -49,6 +49,21 @@ public class NeuralNetwork
 
     public Layer Process(List<float> inputs)
     {
+        inputLayer.UpdateInputs(inputs);
+
+        Layer prevLayer = inputLayer;
+
+        for (int layer = 0; layer < hiddenLayers.Count; ++layer)
+        {
+            Layer currentLayer = hiddenLayers[layer];
+
+            currentLayer.Process(prevLayer);
+
+            prevLayer = currentLayer;
+        }
+
+        this.outputLayer.Process(prevLayer);
+
         return this.outputLayer;
     }
 }

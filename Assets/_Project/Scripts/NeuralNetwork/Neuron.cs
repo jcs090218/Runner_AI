@@ -19,7 +19,7 @@ public class Neuron
 
     public ActivationType activationType = ActivationType.Identity;
 
-    public float bias = 0.0f;
+    public float bias = 0.0f;  // this is constant
 
     public float weight = 0.0f;  // this is also `input` and `output`
 
@@ -30,6 +30,8 @@ public class Neuron
     public float Process(Layer prevLayer)
     {
         float sum = Sum(prevLayer.neurons);
+
+        weight = sum;  // update
 
         return (float)ActivationFunctions.Do(activationType, sum + bias);
     }

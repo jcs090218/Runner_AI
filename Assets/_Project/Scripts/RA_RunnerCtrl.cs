@@ -37,11 +37,17 @@ public class RA_RunnerCtrl : MonoBehaviour
     [SerializeField]
     private bool mRandomIt = false;
 
+    [Range(0.0f, 30.0f)]
     [SerializeField]
     private float mMoveSpeed = 10.0f;
 
+    [Range(0.0f, 10.0f)]
     [SerializeField]
     private float mRotateSpeed = 2.5f;
+
+    [Range(0.0f, 30.0f)]
+    [SerializeField]
+    private float mRayLength = 10.0f;
 
     /* Setter & Getter */
 
@@ -97,7 +103,7 @@ public class RA_RunnerCtrl : MonoBehaviour
         };
 
         int index = 0;
-        var inps = new List<float>();
+        var inputs = new List<float>(mNeuralNetwork.inputLayer.neurons.Count);
 
         foreach (var feeler in feelers)
         {
@@ -108,17 +114,16 @@ public class RA_RunnerCtrl : MonoBehaviour
                 if (hit.collider != null && hit.collider != mCollider)
                 {
                     // Set the input[i] to be the distance of feeler[i]
-                    inps.Add(hit.distance);
+                    inputs[index] = hit.distance;
                 }
             }
 
-            Debug.DrawRay(transform.position, feeler * 10, Color.red);
+            Debug.DrawRay(transform.position, feeler * mRayLength, Color.red);
             ++index;
         }
 
-        var outputLayer = mNeuralNetwork.Process(inps);
+        var outputLayer = mNeuralNetwork.Process(inputs);
 
-        var appm = RA_AppManager.instance;
         mMovement = mDead ? 0 : outputLayer.neurons[0].weight;
     }
 
