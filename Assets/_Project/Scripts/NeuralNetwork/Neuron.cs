@@ -9,19 +9,16 @@
 using System;
 
 /// <summary>
-/// 
+/// Neuron node in neural network.
 /// </summary>
 [Serializable]
 public class Neuron
 {
     /* Variables */
 
-    public float input = 0.0f;
-
     public float bias = 0.0f;
-    public float weight = 0.0f;
 
-    public float output = 0.0f;
+    public float weight = 0.0f;  // this is also `input` and `output`
 
     /* Setter & Getter */
 
