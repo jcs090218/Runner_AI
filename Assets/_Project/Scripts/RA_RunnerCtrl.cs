@@ -26,6 +26,9 @@ public class RA_RunnerCtrl : MonoBehaviour
     [SerializeField]
     private float mMovement = 0.0f;
 
+    [SerializeField]
+    private bool mDead = false;
+
     [Header("** Runtime Variables (RA_RunnerCtrl) **")]
 
     [SerializeField]
@@ -33,6 +36,12 @@ public class RA_RunnerCtrl : MonoBehaviour
 
     [SerializeField]
     private bool mRandomIt = false;
+
+    [SerializeField]
+    private float mMoveSpeed = 10.0f;
+
+    [SerializeField]
+    private float mRotateSpeed = 2.5f;
 
     /* Setter & Getter */
 
@@ -62,7 +71,9 @@ public class RA_RunnerCtrl : MonoBehaviour
     private void Move()
     {
         // Rotate the charater based on Horizonal Input & later NN Output
-        transform.rotation = Quaternion.Euler(transform.eulerAngles + Vector3.up * mMovement * 2.5f);
+        transform.rotation = Quaternion.Euler(transform.eulerAngles + Vector3.up * mMovement * mRotateSpeed);
+
+        mCharacterController.Move(transform.forward * Time.deltaTime * mMoveSpeed);
     }
 
     private void Think()
@@ -86,7 +97,7 @@ public class RA_RunnerCtrl : MonoBehaviour
         };
 
         int index = 0;
-        var inps = new List<float>(feelers.Length);
+        var inps = new List<float>();
 
         foreach (var feeler in feelers)
         {
@@ -97,7 +108,7 @@ public class RA_RunnerCtrl : MonoBehaviour
                 if (hit.collider != null && hit.collider != mCollider)
                 {
                     // Set the input[i] to be the distance of feeler[i]
-                    inps[index] = hit.distance;
+                    inps.Add(hit.distance);
                 }
             }
 
@@ -108,14 +119,20 @@ public class RA_RunnerCtrl : MonoBehaviour
         var outputLayer = mNeuralNetwork.Process(inps);
 
         var appm = RA_AppManager.instance;
-        mMovement = appm.ended ? 0 : outputLayer.neurons[0].weight;
+        mMovement = mDead ? 0 : outputLayer.neurons[0].weight;
     }
 
     private void HandleAnimator()
     {
+        if (mDead)
+        {
+            this.mCharAnimCtrl.Die_0();
+            return;
+        }
+
         if (mMovement == 0.0f)
             this.mCharAnimCtrl.Idle();
         else
-            this.mCharAnimCtrl.Walk();
+            this.mCharAnimCtrl.Run();
     }
 }

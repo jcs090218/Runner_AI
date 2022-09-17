@@ -3388,6 +3388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 851894973775904312}
   - component: {fileID: 760752654763726206}
+  - component: {fileID: 7871894708631653198}
   m_Layer: 0
   m_Name: _Animator
   m_TagString: Untagged
@@ -3433,6 +3434,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7871894708631653198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853902807035934848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e1836386cec3844ac8db16798c1387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mCurrentAnimType: 13
 --- !u!1 &853910707291008178
 GameObject:
   m_ObjectHideFlags: 0
@@ -7224,7 +7238,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.25
+  m_Height: 1.1
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -7244,12 +7258,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mMovement: 0
+  mDead: 0
   mNeuralNetwork:
     inputLayer:
       neurons:
       - activationType: 0
         bias: 0
-        weight: 0
+        weight: 3.472079
       - activationType: 0
         bias: 0
         weight: 0
@@ -7281,9 +7296,11 @@ MonoBehaviour:
       - activationType: 0
         bias: 0
         weight: 0
-    randomInit: 1
-    min: 0
-    max: 0
+    min: -1
+    max: 1
+  mRandomIt: 1
+  mMoveSpeed: 10
+  mRotateSpeed: 2.5
 --- !u!1 &855279987912455794
 GameObject:
   m_ObjectHideFlags: 0
