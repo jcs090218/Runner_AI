@@ -53,13 +53,13 @@ public class NeuralNetwork
 
         Layer prevLayer = inputLayer;
 
-        for (int layer = 0; layer < hiddenLayers.Count; ++layer)
+        for (int layerIndex = 0; layerIndex < hiddenLayers.Count; ++layerIndex)
         {
-            Layer currentLayer = hiddenLayers[layer];
+            Layer layer = hiddenLayers[layerIndex];
 
-            currentLayer.Process(prevLayer);
+            layer.Process(prevLayer);
 
-            prevLayer = currentLayer;
+            prevLayer = layer;
         }
 
         this.outputLayer.Process(prevLayer);

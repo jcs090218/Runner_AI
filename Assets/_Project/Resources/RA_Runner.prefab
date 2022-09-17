@@ -7259,6 +7259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mMovement: 0
   mDead: 0
+  mInputs: []
   mNeuralNetwork:
     inputLayer:
       neurons:
@@ -7293,7 +7294,7 @@ MonoBehaviour:
         weight: 0
     outputLayer:
       neurons:
-      - activationType: 0
+      - activationType: 15
         bias: 0
         weight: 0
     min: -1
@@ -7301,6 +7302,7 @@ MonoBehaviour:
   mRandomIt: 1
   mMoveSpeed: 10
   mRotateSpeed: 2.5
+  mRayLength: 10
 --- !u!1 &855279987912455794
 GameObject:
   m_ObjectHideFlags: 0
