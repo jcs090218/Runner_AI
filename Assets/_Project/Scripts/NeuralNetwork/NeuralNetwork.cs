@@ -8,7 +8,6 @@
  */
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// Neural network that holds all layers.
@@ -18,31 +17,29 @@ public class NeuralNetwork
 {
     /* Variables */
 
-    public Layer inputLayer = new Layer();
-    public List<Layer> hiddenLayers = null;
-    public Layer outputLayer = new Layer();
+    public InputLayer inputLayer = null;
+    public List<HiddenLayer> hiddenLayers = new List<HiddenLayer>();
+    public OutputLayer outputLayer = null;
 
     /* Setter & Getter */
 
     /* Functions */
 
-    public NeuralNetwork(int inputs, List<int> hiddens, int outputs)
+    public void Init(List<float> inputs, List<int> hiddens, int outputs)
     {
-        this.inputLayer.neurons = new List<Neuron>(inputs);
-        this.hiddenLayers = new List<Layer>(hiddens.Count);
-        /* Initialize all neurons in hidden layers */
+        inputLayer = new InputLayer(inputs);
+
+        for (int count = 0; count < hiddens.Count; ++count)
         {
-            int index = 0;
-            foreach (var hiddenLayer in this.hiddenLayers)
-            {
-                hiddenLayer.neurons = new List<Neuron>(hiddens[index]);
-            }
+            var hiddenLayer = new HiddenLayer(hiddens[count]);
+            this.hiddenLayers.Add(hiddenLayer);
         }
-        this.outputLayer.neurons = new List<Neuron>(outputs);
+
+        outputLayer = new OutputLayer(outputs);
     }
 
-    public Layer Process()
+    public Layer Process(List<float> inputs)
     {
-        return outputLayer;
+        return this.outputLayer;
     }
 }

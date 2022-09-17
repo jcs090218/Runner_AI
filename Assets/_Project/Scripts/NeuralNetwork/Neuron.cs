@@ -7,6 +7,7 @@
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
 using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// Neuron node in neural network.
@@ -26,8 +27,23 @@ public class Neuron
 
     /* Functions */
 
-    private float Process()
+    public float Process(Layer prevLayer)
     {
-        return weight + bias;
+        float sum = Sum(prevLayer.neurons);
+
+        return (float)ActivationFunctions.Do(activationType, sum + bias);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private float Sum(List<Neuron> neurons)
+    {
+        float result = 0.0f;
+
+        foreach (var neuron in neurons)
+            result += neuron.weight * weight;
+
+        return result;
     }
 }

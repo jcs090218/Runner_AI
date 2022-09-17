@@ -3019,6 +3019,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1458026926}
     m_Modifications:
+    - target: {fileID: 2137402941, guid: 7553fa6279716b8478c8232c17728ac1, type: 3}
+      propertyPath: mInputs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 854924874755693065, guid: 7553fa6279716b8478c8232c17728ac1,
         type: 3}
       propertyPath: m_Name

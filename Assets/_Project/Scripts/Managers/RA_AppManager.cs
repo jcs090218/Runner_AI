@@ -7,6 +7,7 @@
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
 using JCSUnity;
+using UnityEngine;
 
 /// <summary>
 /// Application manager.
@@ -14,6 +15,11 @@ using JCSUnity;
 public class RA_AppManager : JCS_Manager<RA_AppManager>
 {
     /* Variables */
+
+    [Header("** Check Variables (RA_AppManager) **")]
+
+    [Tooltip("")]
+    public bool ended = false;
 
     /* Setter & Getter */
 

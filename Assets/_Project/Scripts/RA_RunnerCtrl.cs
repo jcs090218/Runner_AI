@@ -23,6 +23,9 @@ public class RA_RunnerCtrl : MonoBehaviour
     [SerializeField]
     private NeuralNetwork mNeuralNetwork = null;
 
+    [SerializeField]
+    private float mMovement = 0.0f;
+
     [Header("** Runtime Variables (RA_RunnerCtrl) **")]
 
     [Tooltip("Inputs, the initial DNA.")]
@@ -41,10 +44,23 @@ public class RA_RunnerCtrl : MonoBehaviour
 
         var hiddens = new List<int>() { 5 };  // 1 layer, 5 neurons
 
-        mNeuralNetwork = new NeuralNetwork(mInputs.Count, hiddens, 1);
+        mNeuralNetwork.Init(mInputs, hiddens, 1);
     }
 
     private void Update()
+    {
+        //Think();
+
+        //Move();
+    }
+
+    private void Move()
+    {
+        // Rotate the charater based on Horizonal Input & later NN Output
+        transform.rotation = Quaternion.Euler(transform.eulerAngles + Vector3.up * mMovement * 2.5f);
+    }
+
+    private void Think()
     {
         // Set up a raycast hit for knowing what we hit
         RaycastHit hit;
@@ -64,7 +80,6 @@ public class RA_RunnerCtrl : MonoBehaviour
             transform.TransformDirection(Vector3.right),
         };
 
-        var appm = RA_AppManager.instance;
         int index = 0;
 
         foreach (var feeler in feelers)
@@ -84,7 +99,9 @@ public class RA_RunnerCtrl : MonoBehaviour
             ++index;
         }
 
-        var outputLayer = mNeuralNetwork.Process();
-        outputLayer.neurons[0].weight = 0;
+        var outputLayer = mNeuralNetwork.Process(mInputs);
+
+        var appm = RA_AppManager.instance;
+        mMovement = appm.ended ? 0 : outputLayer.neurons[0].weight;
     }
 }

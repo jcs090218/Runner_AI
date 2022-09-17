@@ -19,6 +19,30 @@ public static class ActivationFunctions
 
     /* Functions */
 
+    public static double Do(ActivationType type, double x, double a = 0.0f)
+    {
+        switch (type)
+        {
+            case ActivationType.Identity: return Identity(x);
+            case ActivationType.BinaryStep: return BinaryStep(x);
+            case ActivationType.Logistic: return Logistic(x);
+            case ActivationType.Tanh: return Tanh(x);
+            case ActivationType.ArcTan: return ArcTan(x);
+            case ActivationType.ReLU: return ReLU(x);
+            case ActivationType.PReLU: return PReLU(x, a);
+            case ActivationType.ELU: return ELU(x, a);
+            case ActivationType.SoftPlus: return SoftPlus(x);
+            case ActivationType.BentIdentity: return BentIdentity(x);
+            case ActivationType.Sinusoid: return Sinusoid(x);
+            case ActivationType.Sinc: return Sinc(x);
+            case ActivationType.Gaussian: return Gaussian(x);
+            case ActivationType.Bipolar: return Bipolar(x);
+            case ActivationType.BipolarSigmoid: return BipolarSigmoid(x);
+            case ActivationType.SoftSign: return SoftSign(x);
+        }
+        return x;
+    }
+
     /**
      * Activation Functions
      * 
