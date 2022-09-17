@@ -17,13 +17,15 @@ public class NeuralNetwork
     /* Variables */
 
     public InputLayer inputLayer = new InputLayer();
-
-    public List<HiddenLayer> hiddenLayers = new List<HiddenLayer>();
-
+    public List<HiddenLayer> hiddenLayers = null;
     public OutputLayer outputLayer = new OutputLayer();
 
     /* Setter & Getter */
 
     /* Functions */
 
+    public NeuralNetwork(int hiddenLayers)
+    {
+        this.hiddenLayers = new List<HiddenLayer>(hiddenLayers);
+    }
 }
