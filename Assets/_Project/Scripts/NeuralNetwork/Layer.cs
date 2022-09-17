@@ -13,7 +13,7 @@ using System.Collections.Generic;
 /// Base class for all neural network layers.
 /// </summary>
 [Serializable]
-public abstract class Layer
+public class Layer
 {
     /* Variables */
 

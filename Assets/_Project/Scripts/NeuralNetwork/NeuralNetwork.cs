@@ -18,18 +18,31 @@ public class NeuralNetwork
 {
     /* Variables */
 
-    public InputLayer inputLayer = null;
-    public List<HiddenLayer> hiddenLayers = null;
-    public OutputLayer outputLayer = new OutputLayer();
+    public Layer inputLayer = new Layer();
+    public List<Layer> hiddenLayers = null;
+    public Layer outputLayer = new Layer();
 
     /* Setter & Getter */
 
     /* Functions */
 
-    public NeuralNetwork(InputLayer inputLayer, int hiddenLayers, int output)
+    public NeuralNetwork(int inputs, List<int> hiddens, int outputs)
     {
-        this.inputLayer = inputLayer;
-        this.hiddenLayers = new List<HiddenLayer>(hiddenLayers);
-        this.outputLayer.neurons = new List<Neuron>(output);
+        this.inputLayer.neurons = new List<Neuron>(inputs);
+        this.hiddenLayers = new List<Layer>(hiddens.Count);
+        /* Initialize all neurons in hidden layers */
+        {
+            int index = 0;
+            foreach (var hiddenLayer in this.hiddenLayers)
+            {
+                hiddenLayer.neurons = new List<Neuron>(hiddens[index]);
+            }
+        }
+        this.outputLayer.neurons = new List<Neuron>(outputs);
+    }
+
+    public Layer Process()
+    {
+        return outputLayer;
     }
 }

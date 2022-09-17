@@ -45,6 +45,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e15c24c014e9a459a1978539934a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mNeuralNetwork:
+    inputLayer:
+      neurons: []
+    hiddenLayers: []
+    outputLayer:
+      neurons: []
+  mInputLayer:
+    neurons:
+    - bias: 0
+      weight: 0
+    - bias: 0
+      weight: 0
+    - bias: 0
+      weight: 0
+    - bias: 0
+      weight: 0
+    - bias: 0
+      weight: 0
 --- !u!114 &3319517997418360119
 MonoBehaviour:
   m_ObjectHideFlags: 0

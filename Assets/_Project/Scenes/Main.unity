@@ -3165,6 +3165,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RA_Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 5761548435921285639, guid: e31d89259fb076244bc71c10d45cee57,
+        type: 3}
+      propertyPath: inputs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e31d89259fb076244bc71c10d45cee57, type: 3}
