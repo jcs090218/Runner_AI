@@ -9,7 +9,7 @@
 using System;
 
 /// <summary>
-/// 
+/// Hidden layer.
 /// </summary>
 [Serializable]
 public class HiddenLayer : Layer

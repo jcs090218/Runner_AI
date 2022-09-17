@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 
 /// <summary>
-/// 
+/// Input layer.
 /// </summary>
 [Serializable]
 public class InputLayer : Layer

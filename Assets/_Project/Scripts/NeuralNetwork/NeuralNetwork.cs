@@ -8,6 +8,8 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
+using UnityEngine;
 
 /// <summary>
 /// Neural network that holds all layers.
@@ -17,25 +19,32 @@ public class NeuralNetwork
 {
     /* Variables */
 
+    [Header("** Runtime Variables (NeuralNetwork) **")]
+
     public InputLayer inputLayer = null;
-    public List<HiddenLayer> hiddenLayers = new List<HiddenLayer>();
+    public List<HiddenLayer> hiddenLayers = null;
     public OutputLayer outputLayer = null;
+
+    [Header("- Random Initialization")]
+
+    [Tooltip("Minimum number for randomization.")]
+    public float min = -1.0f;
+
+    [Tooltip("Maximum number for randomization.")]
+    public float max = 1.0f;
 
     /* Setter & Getter */
 
     /* Functions */
 
-    public void Init(List<float> inputs, List<int> hiddens, int outputs)
+    public void Randomize()
     {
-        inputLayer = new InputLayer(inputs);
-
-        for (int count = 0; count < hiddens.Count; ++count)
+        inputLayer.Randomize(min, max);
+        foreach (var hiddenLayer in hiddenLayers)
         {
-            var hiddenLayer = new HiddenLayer(hiddens[count]);
-            this.hiddenLayers.Add(hiddenLayer);
+            hiddenLayer.Randomize(min, max);
         }
-
-        outputLayer = new OutputLayer(outputs);
+        outputLayer.Randomize(min, max);
     }
 
     public Layer Process(List<float> inputs)

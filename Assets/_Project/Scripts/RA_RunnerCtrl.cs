@@ -7,6 +7,7 @@
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
 using System.Collections.Generic;
+using System.Windows.Forms.VisualStyles;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -16,21 +17,22 @@ public class RA_RunnerCtrl : MonoBehaviour
 
     private Collider mCollider = null;
 
+    private RA_CharAnimCtrl mCharAnimCtrl = null;
+
     private CharacterController mCharacterController = null;
 
     [Header("** Check Variables (RA_RunnerCtrl) **")]
-
-    [SerializeField]
-    private NeuralNetwork mNeuralNetwork = null;
 
     [SerializeField]
     private float mMovement = 0.0f;
 
     [Header("** Runtime Variables (RA_RunnerCtrl) **")]
 
-    [Tooltip("Inputs, the initial DNA.")]
     [SerializeField]
-    private List<float> mInputs = null;
+    private NeuralNetwork mNeuralNetwork = null;
+
+    [SerializeField]
+    private bool mRandomIt = false;
 
     /* Setter & Getter */
 
@@ -42,16 +44,19 @@ public class RA_RunnerCtrl : MonoBehaviour
 
         this.mCollider = this.GetComponent<Collider>();
 
-        var hiddens = new List<int>() { 5 };  // 1 layer, 5 neurons
+        this.mCharAnimCtrl = this.GetComponentInChildren<RA_CharAnimCtrl>();
 
-        mNeuralNetwork.Init(mInputs, hiddens, 1);
+        if (mRandomIt)
+            mNeuralNetwork.Randomize();
     }
 
     private void Update()
     {
-        //Think();
+        Think();
 
-        //Move();
+        Move();
+
+        HandleAnimator();
     }
 
     private void Move()
@@ -81,6 +86,7 @@ public class RA_RunnerCtrl : MonoBehaviour
         };
 
         int index = 0;
+        var inps = new List<float>(feelers.Length);
 
         foreach (var feeler in feelers)
         {
@@ -91,7 +97,7 @@ public class RA_RunnerCtrl : MonoBehaviour
                 if (hit.collider != null && hit.collider != mCollider)
                 {
                     // Set the input[i] to be the distance of feeler[i]
-                    mInputs[index] = hit.distance;
+                    inps[index] = hit.distance;
                 }
             }
 
@@ -99,9 +105,17 @@ public class RA_RunnerCtrl : MonoBehaviour
             ++index;
         }
 
-        var outputLayer = mNeuralNetwork.Process(mInputs);
+        var outputLayer = mNeuralNetwork.Process(inps);
 
         var appm = RA_AppManager.instance;
         mMovement = appm.ended ? 0 : outputLayer.neurons[0].weight;
+    }
+
+    private void HandleAnimator()
+    {
+        if (mMovement == 0.0f)
+            this.mCharAnimCtrl.Idle();
+        else
+            this.mCharAnimCtrl.Walk();
     }
 }

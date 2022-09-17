@@ -9,7 +9,7 @@
 using System;
 
 /// <summary>
-/// 
+/// Output layer.
 /// </summary>
 [Serializable]
 public class OutputLayer : Layer

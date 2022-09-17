@@ -7224,13 +7224,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.25
+  m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!114 &2137402941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7243,6 +7243,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a4ae9b0d43d0c4a95fbb5157f53f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mMovement: 0
+  mNeuralNetwork:
+    inputLayer:
+      neurons:
+      - activationType: 0
+        bias: 0
+        weight: 0
+      - activationType: 0
+        bias: 0
+        weight: 0
+      - activationType: 0
+        bias: 0
+        weight: 0
+      - activationType: 0
+        bias: 0
+        weight: 0
+      - activationType: 0
+        bias: 0
+        weight: 0
+    hiddenLayers:
+    - neurons:
+      - activationType: 5
+        bias: 0
+        weight: 0
+      - activationType: 5
+        bias: 0
+        weight: 0
+      - activationType: 5
+        bias: 0
+        weight: 0
+      - activationType: 5
+        bias: 0
+        weight: 0
+    outputLayer:
+      neurons:
+      - activationType: 0
+        bias: 0
+        weight: 0
+    randomInit: 1
+    min: 0
+    max: 0
 --- !u!1 &855279987912455794
 GameObject:
   m_ObjectHideFlags: 0
