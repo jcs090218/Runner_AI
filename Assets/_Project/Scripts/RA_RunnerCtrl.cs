@@ -6,14 +6,16 @@
  * $Notice: See LICENSE.txt for modification and distribution information
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
-using JCSUnity;
 using System.Collections.Generic;
 using UnityEngine;
+using JCSUnity;
 
 [RequireComponent(typeof(CharacterController))]
 public class RA_RunnerCtrl : MonoBehaviour
 {
     /* Variables */
+
+    private Vector3 mDeadPosition = Vector3.zero;
 
     private Collider mCollider = null;
 
@@ -105,10 +107,12 @@ public class RA_RunnerCtrl : MonoBehaviour
 
     public void Kill()
     {
+        if (mDeadPosition == this.transform.position)
+            return;
+
         this.mDead = true;
         this.mCharacterController.enabled = false;
-
-        print("kill");
+        this.mDeadPosition = this.transform.position;
     }
 
     public void CallRevive()
@@ -133,6 +137,7 @@ public class RA_RunnerCtrl : MonoBehaviour
         this.mDead = false;
         this.mCharacterController.enabled = true;
         this.transform.position = appm.revivePoint.position;
+        this.mDeadPosition = appm.revivePoint.position;
     }
 
     private void Move()
