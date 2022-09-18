@@ -7,7 +7,6 @@
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
 using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// Base class for all neural network layers.
@@ -22,15 +21,6 @@ public abstract class Layer
     /* Setter & Getter */
 
     /* Functions */
-
-    public void Randomize(float min, float max)
-    {
-        foreach (var neuron in neurons)
-        {
-            neuron.bias = Random.Range(min, max);
-            neuron.weight = Random.Range(min, max);
-        }
-    }
 
     public void Process(Layer prevLayer)
     {

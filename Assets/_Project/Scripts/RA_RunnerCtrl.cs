@@ -76,8 +76,8 @@ public class RA_RunnerCtrl : MonoBehaviour
         this.mCharAnimCtrl = this.GetComponentInChildren<RA_CharAnimCtrl>();
         this.mCharAnimCtrl.AnimEvents.SetRunner(this);
 
-        if (mRandomIt)
-            mNeuralNetwork.Randomize();
+        //if (mRandomIt)
+        //    mNeuralNetwork.Randomize();
 
         // Set up inputs
         mInputs.Clear();
@@ -86,7 +86,7 @@ public class RA_RunnerCtrl : MonoBehaviour
 
         for (int index = 0; index < neurons.Count; ++index)
         {
-            mInputs.Add(neurons[index].weight);
+            //mInputs.Add(neurons[index].weight);
         }
     }
 
@@ -211,9 +211,9 @@ public class RA_RunnerCtrl : MonoBehaviour
             ++index;
         }
 
-        var outputLayer = mNeuralNetwork.Process(mInputs);
+        var outputLayer = mNeuralNetwork.Train(mInputs);
 
-        mMovement = mDead ? 0 : outputLayer.neurons[0].weight;
+        //mMovement = mDead ? 0 : outputLayer.neurons[0].weight;
     }
 
     private void HandleAnimator()

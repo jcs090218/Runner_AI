@@ -6,17 +6,18 @@
  * $Notice: See LICENSE.txt for modification and distribution information
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// Neural network that holds all layers.
 /// </summary>
-[Serializable]
+[System.Serializable]
 public class NeuralNetwork
 {
     /* Variables */
+
+    private static readonly System.Random Random = new System.Random();
 
     [Header("** Runtime Variables (NeuralNetwork) **")]
 
@@ -36,17 +37,7 @@ public class NeuralNetwork
 
     /* Functions */
 
-    public void Randomize()
-    {
-        inputLayer.Randomize(min, max);
-        foreach (var hiddenLayer in hiddenLayers)
-        {
-            hiddenLayer.Randomize(min, max);
-        }
-        outputLayer.Randomize(min, max);
-    }
-
-    public Layer Process(List<float> inputs)
+    public Layer Train(List<float> inputs)
     {
         inputLayer.UpdateInputs(inputs);
 
@@ -64,5 +55,10 @@ public class NeuralNetwork
         this.outputLayer.Process(prevLayer);
 
         return this.outputLayer;
+    }
+
+    public static double GetRandom()
+    {
+        return 2 * Random.NextDouble() - 1;
     }
 }

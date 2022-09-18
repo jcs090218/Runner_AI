@@ -6,13 +6,13 @@
  * $Notice: See LICENSE.txt for modification and distribution information
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
-using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Neuron node in neural network.
 /// </summary>
-[Serializable]
+[System.Serializable]
 public class Neuron
 {
     /* Variables */
@@ -21,11 +21,23 @@ public class Neuron
 
     public float bias = 0.0f;  // this is constant
 
-    public float weight = 0.0f;  // this is also `input` and `output`
+    public List<float> weights = new List<float>();
 
     /* Setter & Getter */
 
     /* Functions */
+
+    public Neuron()
+    {
+
+    }
+
+    public void Randomize(float min, float max)
+    {
+        bias = Random.Range(min, max);
+
+        // TODO: init weights
+    }
 
     /// <summary>
     /// This returns the output/prediction.
@@ -45,7 +57,7 @@ public class Neuron
         float result = 0.0f;
 
         foreach (var neuron in neurons)
-            result += neuron.weight * weight;
+            result += neuron.weights[0] * weights[0];
 
         return result;
     }
