@@ -38,6 +38,9 @@ public class RA_RunnerCtrl : MonoBehaviour
     [SerializeField]
     private List<float> mInputs = null;
 
+    [SerializeField]
+    private float mFitness = 0.0f;
+
     [Header("** Initialize Variables (RA_RunnerCtrl) **")]
 
     [SerializeField]
@@ -114,6 +117,8 @@ public class RA_RunnerCtrl : MonoBehaviour
         this.mDead = true;
         this.mCharacterController.enabled = false;
         this.mDeadPosition = this.transform.position;
+
+        // TODO: ..
     }
 
     public void CallRevive()
@@ -137,8 +142,13 @@ public class RA_RunnerCtrl : MonoBehaviour
 
         this.mDead = false;
         this.mCharacterController.enabled = true;
-        this.transform.position = appm.revivePoint.position;
+        {
+            this.transform.position = appm.revivePoint.position;
+            this.transform.eulerAngles = appm.revivePoint.eulerAngles;
+        }
         this.mDeadPosition = appm.revivePoint.position;
+
+        mFitness = 0.0f;
     }
 
     private void Move()

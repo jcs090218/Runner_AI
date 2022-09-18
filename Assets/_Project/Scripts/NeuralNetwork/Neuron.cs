@@ -27,13 +27,14 @@ public class Neuron
 
     /* Functions */
 
+    /// <summary>
+    /// This returns the output/prediction.
+    /// </summary>
     public float Process(Layer prevLayer)
     {
         float sum = Sum(prevLayer.neurons);
 
-        weight = (float)ActivationFunctions.Do(activationType, sum + bias);
-
-        return weight;
+        return (float)ActivationFunctions.Do(activationType, sum + bias);
     }
 
     /// <summary>
