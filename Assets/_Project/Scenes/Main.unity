@@ -679,7 +679,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9, y: -0.5}
+  m_AnchoredPosition: {x: 13.2, y: -0.5}
   m_SizeDelta: {x: -28, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &291598257
@@ -715,7 +715,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Revive
+  m_Text: Auto Revive
 --- !u!222 &291598258
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3476,18 +3476,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 854924873759421490}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1319704954 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2137402941, guid: 7553fa6279716b8478c8232c17728ac1,
-    type: 3}
-  m_PrefabInstance: {fileID: 854924873759421490}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a4ae9b0d43d0c4a95fbb5157f53f54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1340447847
 GameObject:
   m_ObjectHideFlags: 0
@@ -4654,7 +4642,7 @@ GameObject:
   - component: {fileID: 1935821325}
   - component: {fileID: 1935821326}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: Tog_AutoRevive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4986,21 +4974,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: RA_Managers
       objectReference: {fileID: 0}
-    - target: {fileID: 5761548435921285639, guid: e31d89259fb076244bc71c10d45cee57,
+    - target: {fileID: 3319517997418360119, guid: e31d89259fb076244bc71c10d45cee57,
         type: 3}
-      propertyPath: mRunnerCtrl
+      propertyPath: mAutoRevive
       value: 
-      objectReference: {fileID: 1319704954}
+      objectReference: {fileID: 1935821326}
+    - target: {fileID: 3319517997418360119, guid: e31d89259fb076244bc71c10d45cee57,
+        type: 3}
+      propertyPath: mToggle_AutoRevive
+      value: 
+      objectReference: {fileID: 1935821326}
     - target: {fileID: 5761548435921285639, guid: e31d89259fb076244bc71c10d45cee57,
         type: 3}
       propertyPath: revivePoint
       value: 
       objectReference: {fileID: 1635616239}
-    - target: {fileID: 5761548435921285639, guid: e31d89259fb076244bc71c10d45cee57,
-        type: 3}
-      propertyPath: inputs.Array.size
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e31d89259fb076244bc71c10d45cee57, type: 3}
