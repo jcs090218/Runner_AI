@@ -21,6 +21,16 @@ public class RA_AppManager : JCS_Manager<RA_AppManager>
     [Tooltip("Generation index.")]
     public int generation = 0;
 
+    [Header("** Initialize Variables (RA_AppManager) **")]
+
+    [Tooltip("Transform position to reset the runner on revive.")]
+    public Transform revivePoint = null;
+
+    [Header("** Runtime Variables (RA_AppManager) **")]
+
+    [Tooltip("Auto revive the runner after it's dead.")]
+    public bool autoRevive = true;
+
     /* Setter & Getter */
 
     /* Functions */

@@ -25,6 +25,6 @@ public class RA_Obstacle : MonoBehaviour
         if (runner == null)
             return;
 
-        // TODO: ..
+        runner.Kill();
     }
 }

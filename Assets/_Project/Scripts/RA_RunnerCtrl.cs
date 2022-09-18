@@ -6,8 +6,8 @@
  * $Notice: See LICENSE.txt for modification and distribution information
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
+using JCSUnity;
 using System.Collections.Generic;
-using System.Windows.Forms.VisualStyles;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -24,6 +24,9 @@ public class RA_RunnerCtrl : MonoBehaviour
     [Header("** Check Variables (RA_RunnerCtrl) **")]
 
     [SerializeField]
+    private Vector3 mVelocity = Vector3.zero;
+
+    [SerializeField]
     private float mMovement = 0.0f;
 
     [SerializeField]
@@ -32,10 +35,12 @@ public class RA_RunnerCtrl : MonoBehaviour
     [SerializeField]
     private List<float> mInputs = null;
 
-    [Header("** Runtime Variables (RA_RunnerCtrl) **")]
+    [Header("** Initialize Variables (RA_RunnerCtrl) **")]
 
     [SerializeField]
     private NeuralNetwork mNeuralNetwork = null;
+
+    [Header("** Runtime Variables (RA_RunnerCtrl) **")]
 
     [SerializeField]
     private bool mRandomIt = false;
@@ -63,6 +68,7 @@ public class RA_RunnerCtrl : MonoBehaviour
         this.mCollider = this.GetComponent<Collider>();
 
         this.mCharAnimCtrl = this.GetComponentInChildren<RA_CharAnimCtrl>();
+        this.mCharAnimCtrl.AnimEvents.SetRunner(this);
 
         if (mRandomIt)
             mNeuralNetwork.Randomize();
@@ -80,6 +86,16 @@ public class RA_RunnerCtrl : MonoBehaviour
 
     private void Update()
     {
+        if (mCharacterController.isGrounded && JCS_Mathf.IsNegative(mVelocity.y))
+        {
+            mVelocity.y = -0.001f;
+            mVelocity.z = mMoveSpeed;  // always move forward
+        }
+        else
+        {
+            mVelocity.z = 0.0f;
+        }
+
         Think();
 
         Move();
@@ -87,16 +103,61 @@ public class RA_RunnerCtrl : MonoBehaviour
         HandleAnimator();
     }
 
+    public void Kill()
+    {
+        this.mDead = true;
+        this.mCharacterController.enabled = false;
+
+        print("kill");
+    }
+
+    public void CallRevive()
+    {
+        var appm = RA_AppManager.instance;
+
+        if (!appm.autoRevive)
+            return;
+
+        Revive();
+    }
+
+    public void Revive()
+    {
+        if (!mDead)
+            return;
+
+        var appm = RA_AppManager.instance;
+
+        ++appm.generation;
+
+        this.mDead = false;
+        this.mCharacterController.enabled = true;
+        this.transform.position = appm.revivePoint.position;
+    }
+
     private void Move()
     {
+        if (mDead)
+            return;
+
+        mVelocity.y -= (JCS_GameConstant.GRAVITY * Time.deltaTime * JCS_GameSettings.instance.GRAVITY_PRODUCT);
+
+        Vector3 jumpMotion = Vector3.up * mVelocity.y;
+        Vector3 moveMotion = transform.forward * mVelocity.z;
+
+        Vector3 motion = jumpMotion + moveMotion;
+
         // Rotate the charater based on Horizonal Input & later NN Output
         transform.rotation = Quaternion.Euler(transform.eulerAngles + Vector3.up * mMovement * mRotateSpeed);
 
-        mCharacterController.Move(transform.forward * Time.deltaTime * mMoveSpeed);
+        mCharacterController.Move(motion * Time.deltaTime);
     }
 
     private void Think()
     {
+        if (mDead)
+            return;
+
         // Set up a raycast hit for knowing what we hit
         RaycastHit hit;
 

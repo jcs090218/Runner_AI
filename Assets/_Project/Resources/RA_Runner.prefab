@@ -3388,6 +3388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 851894973775904312}
   - component: {fileID: 760752654763726206}
+  - component: {fileID: 7154727042789918746}
   - component: {fileID: 7871894708631653198}
   m_Layer: 0
   m_Name: _Animator
@@ -3427,13 +3428,26 @@ Animator:
   m_Controller: {fileID: 9100000, guid: e4398e22110ae914fb88cc27beb641a6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7154727042789918746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853902807035934848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a75455e0d5537439a56ff1275e1c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mRunnerCtrl: {fileID: 0}
 --- !u!114 &7871894708631653198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7257,6 +7271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a4ae9b0d43d0c4a95fbb5157f53f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mVelocity: {x: 0, y: 0, z: 0}
   mMovement: 0
   mDead: 0
   mInputs: []
@@ -7300,7 +7315,7 @@ MonoBehaviour:
     min: -1
     max: 1
   mRandomIt: 1
-  mMoveSpeed: 10
+  mMoveSpeed: 5
   mRotateSpeed: 2.5
   mRayLength: 10
 --- !u!1 &855279987912455794

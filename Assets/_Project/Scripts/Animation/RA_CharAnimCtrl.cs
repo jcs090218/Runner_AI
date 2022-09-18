@@ -6,17 +6,21 @@
  * $Notice: See LICENSE.txt for modification and distribution information
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
 /// Animator control.
 /// </summary>
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(RA_CharAnimEvts))]
 public class RA_CharAnimCtrl : MonoBehaviour
 {
     /* Variables */
 
     private Animator mAnimator = null;
+
+    private RA_CharAnimEvts mAnimEvents = null;
 
     [Header("** Check Variables (RA_RunnerAnimCtrl) **")]
 
@@ -26,11 +30,15 @@ public class RA_CharAnimCtrl : MonoBehaviour
 
     /* Setter & Getter */
 
+    public RA_CharAnimType CharAnimType { get { return mCurrentAnimType; } }
+    public RA_CharAnimEvts AnimEvents { get { return this.mAnimEvents; } }
+
     /* Functions */
 
     private void Awake()
     {
         this.mAnimator = this.GetComponent<Animator>();
+        this.mAnimEvents = this.GetComponent<RA_CharAnimEvts>();
     }
 
     public void Idle() { PlayAnimation(RA_CharAnimType.IDLE_A); }
@@ -65,7 +73,7 @@ public class RA_CharAnimCtrl : MonoBehaviour
     /// </summary>
     public bool AnimationFinished(int layerIndex = 0)
     {
-        return mAnimator.GetCurrentAnimatorStateInfo(layerIndex).normalizedTime >= 1;
+        return mAnimator.GetCurrentAnimatorStateInfo(layerIndex).normalizedTime >= 0.01f;
     }
 
     public void PlayAnimation(RA_CharAnimType type)
