@@ -28,6 +28,7 @@ public class RA_RunnerCtrl : MonoBehaviour
     [SerializeField]
     private Vector3 mVelocity = Vector3.zero;
 
+    [Tooltip("Movement unit vector, either turn left/right.")]
     [SerializeField]
     private float mMovement = 0.0f;
 
