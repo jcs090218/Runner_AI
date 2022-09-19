@@ -20,12 +20,11 @@ public class HiddenLayer : Layer
 
     /* Functions */
 
-    public HiddenLayer(int neurons)
+    public HiddenLayer(int size, Layer prevLayer)
     {
-        for (int index = 0; index < neurons; ++index)
+        for (int index = 0; index < size; ++index)
         {
-            var neuron = new Neuron();
-            this.neurons.Add(neuron);
+            this.neurons.Add(new Neuron(prevLayer));
         }
     }
 }

@@ -32,6 +32,9 @@ public class Neuron
 
     /* Functions */
 
+    /// <summary>
+    /// For the input layer.
+    /// </summary>
     public Neuron()
     {
         this.inputSynapses = new List<Synapse>();
@@ -39,9 +42,13 @@ public class Neuron
         this.bias = NeuralNetwork.GetRandom();
     }
 
-    public Neuron(IEnumerable<Neuron> inputNeurons) : this()
+    /// <summary>
+    /// For the rest of the layers (hidden and output).
+    /// </summary>
+    /// <param name="prevLayer"> Previouse layer for the input neurons. </param>
+    public Neuron(Layer prevLayer) : this()
     {
-        foreach (var inputNeuron in inputNeurons)
+        foreach (var inputNeuron in prevLayer.neurons)
         {
             // create a synapse
             var synapse = new Synapse(inputNeuron, this);

@@ -21,18 +21,11 @@ public class InputLayer : Layer
 
     /* Functions */
 
-    public InputLayer(List<float> inputs)
+    public InputLayer(int size)
     {
-        foreach (var input in inputs)
+        for (int index = 0; index < size; ++index)
         {
-            var neuron = new Neuron();
-
-            this.neurons.Add(neuron);
+            this.neurons.Add(new Neuron());
         }
-    }
-
-    public void UpdateInputs(List<float> inputs)
-    {
-        // TODO: ..
     }
 }

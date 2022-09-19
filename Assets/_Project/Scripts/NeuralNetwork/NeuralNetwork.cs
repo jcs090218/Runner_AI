@@ -6,6 +6,7 @@
  * $Notice: See LICENSE.txt for modification and distribution information
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,9 @@ public class NeuralNetwork
     private static readonly System.Random Random = new System.Random();
 
     [Header("** Runtime Variables (NeuralNetwork) **")]
+
+    public double learnRate = 0.4f;
+    public double momentum = 0.9f;
 
     public InputLayer inputLayer = null;
     public List<HiddenLayer> hiddenLayers = null;
@@ -37,6 +41,20 @@ public class NeuralNetwork
 
     /* Functions */
 
+    public NeuralNetwork(int inputSize, int hiddenSize, int outputSize, int numHiddenLayers = 1)
+    {
+        inputLayer = new InputLayer(inputSize);
+        hiddenLayers = new List<HiddenLayer>();
+        for (int index = 0; index < numHiddenLayers; ++index)
+        {
+            // Find the previous layer on the left
+            Layer prevLayer = (index == 0) ? inputLayer : hiddenLayers[index - 1];
+            hiddenLayers.Add(new HiddenLayer(hiddenSize, prevLayer));
+        }
+        // Assign with the previous hidden layer.
+        outputLayer = new OutputLayer(outputSize, hiddenLayers[numHiddenLayers - 1]);
+    }
+
     public Layer Train(List<float> inputs)
     {
         return this.outputLayer;
@@ -47,6 +65,7 @@ public class NeuralNetwork
     /// </summary>
     public static double GetRandom()
     {
+        // TODO(jenchieh): use Unity built-in random generator?
         return 2 * Random.NextDouble() - 1;
     }
 }
