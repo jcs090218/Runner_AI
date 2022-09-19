@@ -8,18 +8,22 @@
  */
 
 /// <summary>
-/// Synapse live in each neuron.
+/// Synapse live in between each neuron.
 /// </summary>
 public class Synapse
 {
     /* Variables */
 
+    /* Setter & Getter */
+
+    // Neuron on the left. (see graph)
     public Neuron InputNeuron { get; set; }
+    // Neuron on the right. (see graph)
     public Neuron OutputNeuron { get; set; }
+    // Weights control the signal (or the strength of the connection) between
+    // two neurons.
     public double Weight { get; set; }
     public double WeightDelta { get; set; }
-
-    /* Setter & Getter */
 
     /* Functions */
 
