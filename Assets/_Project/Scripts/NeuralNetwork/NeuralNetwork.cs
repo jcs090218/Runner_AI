@@ -39,24 +39,12 @@ public class NeuralNetwork
 
     public Layer Train(List<float> inputs)
     {
-        inputLayer.UpdateInputs(inputs);
-
-        Layer prevLayer = inputLayer;
-
-        for (int layerIndex = 0; layerIndex < hiddenLayers.Count; ++layerIndex)
-        {
-            Layer layer = hiddenLayers[layerIndex];
-
-            layer.Process(prevLayer);
-
-            prevLayer = layer;
-        }
-
-        this.outputLayer.Process(prevLayer);
-
         return this.outputLayer;
     }
 
+    /// <summary>
+    /// Generate random value for bias and weight.
+    /// </summary>
     public static double GetRandom()
     {
         return 2 * Random.NextDouble() - 1;

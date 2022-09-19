@@ -22,11 +22,4 @@ public abstract class Layer
 
     /* Functions */
 
-    public void Process(Layer prevLayer)
-    {
-        foreach (var neuron in prevLayer.neurons)
-        {
-            neuron.Process(prevLayer);
-        }
-    }
 }

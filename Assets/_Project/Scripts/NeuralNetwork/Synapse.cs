@@ -14,23 +14,24 @@ public class Synapse
 {
     /* Variables */
 
-    /* Setter & Getter */
-
     // Neuron on the left. (see graph)
-    public Neuron InputNeuron { get; set; }
+    public Neuron inputNeuron = null;
     // Neuron on the right. (see graph)
-    public Neuron OutputNeuron { get; set; }
+    public Neuron outputNeuron = null;
+
     // Weights control the signal (or the strength of the connection) between
     // two neurons.
-    public double Weight { get; set; }
-    public double WeightDelta { get; set; }
+    public double weight = 0.0f;
+    public double weightDelta = 0.0f;
+
+    /* Setter & Getter */
 
     /* Functions */
 
     public Synapse(Neuron inputNeuron, Neuron outputNeuron)
     {
-        InputNeuron = inputNeuron;
-        OutputNeuron = outputNeuron;
-        Weight = NeuralNetwork.GetRandom();
+        this.inputNeuron = inputNeuron;
+        this.outputNeuron = outputNeuron;
+        this.weight = NeuralNetwork.GetRandom();
     }
 }

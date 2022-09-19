@@ -7,7 +7,8 @@
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
+using static UnityEngine.Rendering.DebugUI;
 
 /// <summary>
 /// Neuron node in neural network.
@@ -19,9 +20,13 @@ public class Neuron
 
     public ActivationType activationType = ActivationType.Identity;
 
-    public float bias = 0.0f;  // this is constant
+    public List<Synapse> inputSynapses = null;
+    public List<Synapse> outputSynapses = null;
 
-    public List<float> weights = new List<float>();
+    public double bias = 0.0f;
+    public double biasDelta = 0.0f;
+    public double gradient = 0.0f;
+    public double value = 0.0f;
 
     /* Setter & Getter */
 
@@ -29,36 +34,34 @@ public class Neuron
 
     public Neuron()
     {
-
+        this.inputSynapses = new List<Synapse>();
+        this.outputSynapses = new List<Synapse>();
+        this.bias = NeuralNetwork.GetRandom();
     }
 
-    public void Randomize(float min, float max)
+    public Neuron(IEnumerable<Neuron> inputNeurons) : this()
     {
-        bias = Random.Range(min, max);
-
-        // TODO: init weights
-    }
-
-    /// <summary>
-    /// This returns the output/prediction.
-    /// </summary>
-    public float Process(Layer prevLayer)
-    {
-        float sum = Sum(prevLayer.neurons);
-
-        return (float)ActivationFunctions.Do(activationType, sum + bias);
+        foreach (var inputNeuron in inputNeurons)
+        {
+            // create a synapse
+            var synapse = new Synapse(inputNeuron, this);
+            // and connect the two neurons
+            inputNeuron.outputSynapses.Add(synapse);  // connect to the left
+            inputSynapses.Add(synapse);               // connect to the right
+        }
     }
 
     /// <summary>
-    /// The summation of a[0-n] * b[0-n]
+    /// Calculate the value while in forward propogation (predicting).
     /// </summary>
-    private float Sum(List<Neuron> neurons)
+    public virtual double CalculateValue()
     {
-        float result = 0.0f;
+        value = ActivationFunctions.Do(activationType, inputSynapses.Sum(a => a.weight * a.inputNeuron.value) + bias);
+        return value;
+    }
 
-        foreach (var neuron in neurons)
-            result += neuron.weights[0] * weights[0];
-
-        return result;
+    public double CalculateError(double target)
+    {
+        return target - value;
     }
 }
