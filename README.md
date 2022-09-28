@@ -11,3 +11,7 @@ Learning neural network
 - [Run-Forrest](https://github.com/Jabrils/Run-Forrest-Open-Source) (Simpler)
 - [Run-Forrest-FULL](https://github.com/Jabrils/Run-Forrest-FULL)
 - [Unity-Neural-Network](https://github.com/Blueteak/Unity-Neural-Network)
+
+# 📝 Todo List
+
+- [ ] Use custom data type to hold hidder layer information.
