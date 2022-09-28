@@ -11,9 +11,12 @@ using UnityEngine;
 using JCSUnity;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(NeuralNetwork))]
 public class RA_RunnerCtrl : MonoBehaviour
 {
     /* Variables */
+
+    private NeuralNetwork mNeuralNetwork = null;
 
     private Vector3 mDeadPosition = Vector3.zero;
 
@@ -41,11 +44,6 @@ public class RA_RunnerCtrl : MonoBehaviour
     [SerializeField]
     private float mFitness = 0.0f;
 
-    [Header("** Initialize Variables (RA_RunnerCtrl) **")]
-
-    [SerializeField]
-    private NeuralNetwork mNeuralNetwork = null;
-
     [Header("** Runtime Variables (RA_RunnerCtrl) **")]
 
     [SerializeField]
@@ -69,6 +67,8 @@ public class RA_RunnerCtrl : MonoBehaviour
 
     private void Awake()
     {
+        this.mNeuralNetwork = this.GetComponent<NeuralNetwork>();
+
         this.mCharacterController = this.GetComponent<CharacterController>();
 
         this.mCollider = this.GetComponent<Collider>();

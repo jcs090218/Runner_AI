@@ -7217,6 +7217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 854924874755693070}
   - component: {fileID: 4580897713533593798}
+  - component: {fileID: 3540889862773493855}
   - component: {fileID: 2137402941}
   m_Layer: 0
   m_Name: RA_Runner
@@ -7259,6 +7260,31 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &3540889862773493855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854924874755693065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9795d3de42bd82418f57a8dfa234f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputLayer:
+    neurons: []
+  hiddenLayers: []
+  outputLayer:
+    neurons: []
+  inputSize: 3
+  hiddenSize: 4
+  outputSize: 1
+  numHiddenLayers: 1
+  learnRate: 0.4000000059604645
+  momentum: 0.8999999761581421
+  min: -1
+  max: 1
 --- !u!114 &2137402941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7275,45 +7301,7 @@ MonoBehaviour:
   mMovement: 0
   mDead: 0
   mInputs: []
-  mNeuralNetwork:
-    inputLayer:
-      neurons:
-      - activationType: 0
-        bias: 0
-        weight: 3.472079
-      - activationType: 0
-        bias: 0
-        weight: 0
-      - activationType: 0
-        bias: 0
-        weight: 0
-      - activationType: 0
-        bias: 0
-        weight: 0
-      - activationType: 0
-        bias: 0
-        weight: 0
-    hiddenLayers:
-    - neurons:
-      - activationType: 5
-        bias: 0
-        weight: 0
-      - activationType: 5
-        bias: 0
-        weight: 0
-      - activationType: 5
-        bias: 0
-        weight: 0
-      - activationType: 5
-        bias: 0
-        weight: 0
-    outputLayer:
-      neurons:
-      - activationType: 15
-        bias: 0
-        weight: 0
-    min: -1
-    max: 1
+  mFitness: 0
   mRandomIt: 1
   mMoveSpeed: 5
   mRotateSpeed: 2.5

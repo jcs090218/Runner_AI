@@ -6,28 +6,51 @@
  * $Notice: See LICENSE.txt for modification and distribution information
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// Neural network that holds all layers.
 /// </summary>
-[System.Serializable]
-public class NeuralNetwork
+public class NeuralNetwork : MonoBehaviour
 {
     /* Variables */
 
     private static readonly System.Random Random = new System.Random();
 
-    [Header("** Runtime Variables (NeuralNetwork) **")]
-
-    public double learnRate = 0.4f;
-    public double momentum = 0.9f;
+    [Header("** Check Variables (NeuralNetwork) **")]
 
     public InputLayer inputLayer = null;
+
     public List<HiddenLayer> hiddenLayers = null;
+
     public OutputLayer outputLayer = null;
+
+    [Header("** Initialize Variables (NeuralNetwork) **")]
+
+    [Tooltip("Number of inputs.")]
+    [Range(1, 30)]
+    public int inputSize = 3;
+
+    [Tooltip("Number of neurons in one hidden layer.")]
+    [Range(1, 30)]
+    public int hiddenSize = 4;  // TODO: should we turn this into a list?
+
+    [Tooltip("Number of outputs.")]
+    [Range(1, 30)]
+    public int outputSize = 1;
+
+    [Tooltip("Number of the hidden layers.")]
+    [Range(1, 30)]
+    public int numHiddenLayers = 1;
+
+    [Header("** Runtime Variables (NeuralNetwork) **")]
+
+    [Tooltip("")]
+    public double learnRate = 0.4f;
+
+    [Tooltip("")]
+    public double momentum = 0.9f;
 
     [Header("- Random Initialization")]
 
@@ -41,18 +64,22 @@ public class NeuralNetwork
 
     /* Functions */
 
-    public NeuralNetwork(int inputSize, int hiddenSize, int outputSize, int numHiddenLayers = 1)
+    private void Awake()
     {
         inputLayer = new InputLayer(inputSize);
-        hiddenLayers = new List<HiddenLayer>();
+        InitHiddenLayers();
+        // Assign with the previous hidden layer.
+        outputLayer = new OutputLayer(outputSize, hiddenLayers[numHiddenLayers - 1]);
+    }
+
+    private void InitHiddenLayers()
+    {
         for (int index = 0; index < numHiddenLayers; ++index)
         {
             // Find the previous layer on the left
             Layer prevLayer = (index == 0) ? inputLayer : hiddenLayers[index - 1];
             hiddenLayers.Add(new HiddenLayer(hiddenSize, prevLayer));
         }
-        // Assign with the previous hidden layer.
-        outputLayer = new OutputLayer(outputSize, hiddenLayers[numHiddenLayers - 1]);
     }
 
     public Layer Train(List<float> inputs)
