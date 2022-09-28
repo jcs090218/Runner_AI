@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public class AR_TimeScaleSlider : MonoBehaviour
+public class RA_TimeScaleSlider : MonoBehaviour
 {
     /* Variables */
 
