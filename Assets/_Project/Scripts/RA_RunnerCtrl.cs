@@ -82,7 +82,7 @@ public class RA_RunnerCtrl : MonoBehaviour
         // Set up inputs
         mInputs.Clear();
 
-        List<Neuron> neurons = mNeuralNetwork.inputLayer.neurons;
+        List<Neuron> neurons = mNeuralNetwork.Data.inputLayer.neurons;
 
         for (int index = 0; index < neurons.Count; ++index)
         {

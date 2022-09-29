@@ -7272,18 +7272,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9795d3de42bd82418f57a8dfa234f18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputLayer:
-    neurons: []
-  hiddenLayers: []
-  outputLayer:
-    neurons: []
-  inputSize: 3
-  hiddenSizes: 04000000
-  outputSize: 1
-  learnRate: 0.4000000059604645
-  momentum: 0.8999999761581421
-  min: -1
-  max: 1
+  mData:
+    inputLayer:
+      neurons: []
+    hiddenLayers: []
+    outputLayer:
+      neurons: []
+    inputSize: 3
+    hiddenSizes: 
+    outputSize: 1
+    learnRate: 0.4000000059604645
+    momentum: 0.8999999761581421
+  mInitFromPath: 0
+  mSaveLoadPath: default.nnd
 --- !u!114 &2137402941
 MonoBehaviour:
   m_ObjectHideFlags: 0

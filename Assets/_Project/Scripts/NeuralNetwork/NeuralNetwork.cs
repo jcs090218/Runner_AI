@@ -6,8 +6,10 @@
  * $Notice: See LICENSE.txt for modification and distribution information
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
+using JCSUnity;
 
 /// <summary>
 /// Neural network that holds all layers.
@@ -18,66 +20,40 @@ public class NeuralNetwork : MonoBehaviour
 
     private static readonly System.Random Random = new System.Random();
 
-    [Header("** Check Variables (NeuralNetwork) **")]
-
-    public InputLayer inputLayer = null;
-
-    public List<HiddenLayer> hiddenLayers = null;
-
-    public OutputLayer outputLayer = null;
-
     [Header("** Initialize Variables (NeuralNetwork) **")]
 
-    [Tooltip("Number of inputs.")]
-    [Range(1, 30)]
-    public int inputSize = 3;
+    [Tooltip("Data type to store neural network.")]
+    [SerializeField]
+    private NeuralNetworkData mData = null;
 
-    [Tooltip("Number of neurons in each hidden layer.")]
-    public List<int> hiddenSizes = null;
+    [Tooltip("Initialize this neural network from a file.")]
+    [SerializeField]
+    private bool mInitFromPath = false;
 
-    [Tooltip("Number of outputs.")]
-    [Range(1, 30)]
-    public int outputSize = 1;
-
-    [Header("** Runtime Variables (NeuralNetwork) **")]
-
-    [Tooltip("")]
-    public double learnRate = 0.4f;
-
-    [Tooltip("")]
-    public double momentum = 0.9f;
+    [Tooltip("File to save and load.")]
+    [SerializeField]
+    private string mSaveLoadPath = "";
 
     /* Setter & Getter */
+
+    public NeuralNetworkData Data { get { return this.mData; } }
 
     /* Functions */
 
     private void Awake()
     {
-        if (hiddenSizes.Count == 0)
-        {
-            Debug.LogWarning("Neural Network with hidden sizes of 0 is not allowed");
-            return;
-        }
+        mSaveLoadPath = Path.Combine(Application.persistentDataPath, mSaveLoadPath);
 
-        inputLayer = new InputLayer(inputSize);
-        InitHiddenLayers();
-        // Assign with the previous hidden layer.
-        outputLayer = new OutputLayer(outputSize, hiddenLayers[hiddenSizes.Count - 1]);
+        if (mInitFromPath)
+            Load();
+        else
+            mData.Init();
     }
 
-    private void InitHiddenLayers()
-    {
-        for (int index = 0; index < hiddenSizes.Count; ++index)
-        {
-            // Find the previous layer on the left
-            Layer prevLayer = (index == 0) ? inputLayer : hiddenLayers[index - 1];
-            hiddenLayers.Add(new HiddenLayer(hiddenSizes[index], prevLayer));
-        }
-    }
 
     public Layer Train(List<float> inputs)
     {
-        return this.outputLayer;
+        return this.Data.outputLayer;
     }
 
     /// <summary>
@@ -87,5 +63,35 @@ public class NeuralNetwork : MonoBehaviour
     {
         // TODO(jenchieh): use Unity built-in random generator?
         return 2 * Random.NextDouble() - 1;
+    }
+
+    /// <summary>
+    /// Save the neural network to a file specified by PATH.
+    /// </summary>
+    public void Save()
+    {
+        Save(mSaveLoadPath);
+    }
+    public void Save(string path)
+    {
+        mData.Save<NeuralNetworkData>(path);
+    }
+
+    /// <summary>
+    /// Load the neural network from a file specified by PATH.
+    /// </summary>
+    public void Load()
+    {
+        Load(mSaveLoadPath);
+    }
+    public void Load(string path)
+    {
+        if (!File.Exists(path))
+        {
+            Debug.LogError("Failed to load neural network data from, " + path);
+            return;
+        }
+
+        mData = NeuralNetworkData.LoadFromFile<NeuralNetworkData>(path);
     }
 }
