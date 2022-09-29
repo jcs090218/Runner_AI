@@ -7,6 +7,7 @@
  *                   Copyright © 2022 by Shen, Jen-Chieh $
  */
 using System;
+using UnityEngine;
 
 /// <summary>
 /// Hidden layer.

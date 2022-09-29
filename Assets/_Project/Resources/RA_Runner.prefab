@@ -7278,9 +7278,8 @@ MonoBehaviour:
   outputLayer:
     neurons: []
   inputSize: 3
-  hiddenSize: 4
+  hiddenSizes: 04000000
   outputSize: 1
-  numHiddenLayers: 1
   learnRate: 0.4000000059604645
   momentum: 0.8999999761581421
   min: -1
