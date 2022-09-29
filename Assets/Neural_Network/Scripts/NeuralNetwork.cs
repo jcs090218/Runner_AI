@@ -9,7 +9,6 @@
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
-using JCSUnity;
 
 /// <summary>
 /// Neural network that holds all layers.
